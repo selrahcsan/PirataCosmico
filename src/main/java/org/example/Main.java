@@ -4,17 +4,17 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
-    public static final int Tentativas = 6;
-    public static final int TamanhoTela = 10;
-    public static String Nome;
-    public static Scanner EntradaDados = new Scanner(System.in);
-    public static int PosicaoXEltron;
-    public static int PosicaoYEltron;
-    public static int DistanciaEltron;
-    public static int PosicaoXJogador;
-    public static int PosicaoYJogador;
-    public static int DistanciaJogador;
-    public static int jogadas;
+    private static final int _tentativas = 6;
+    private static final int _tamanhoTela = 10;
+    private static String _nome;
+    private static final Scanner _entradaDados = new Scanner(System.in);
+    private static int _posicaoXEltron;
+    private static int _posicaoYEltron;
+    private static int _distanciaEltron;
+    private static int _posicaoXJogador;
+    private static int _posicaoYJogador;
+    private static int _distanciaJogador;
+
     public static void main(String[] args) {
         MenuInicial();
         Jogadas();
@@ -22,84 +22,81 @@ public class Main {
 
     private static void MenuInicial(){
         System.out.println("Pirata Cósmico");
-        String respostaTemp ="";
+        String respostaTemp;
         do {
-            System.out.print("Qual o seu nome: ");
-            respostaTemp = EntradaDados.nextLine();
+            System.out.print("Qual é o seu nome: ");
+            respostaTemp = _entradaDados.nextLine();
             if (NomeEhValido(respostaTemp))
-                Nome = respostaTemp;
+                _nome = respostaTemp;
             else
-                System.out.println("Nome deve ter mais de 3 Caracteres");
-        }while (NomeEhValido(respostaTemp));
+                System.out.println("Nome, deve ter mais de 3 Caracteres!");
+        }while (!NomeEhValido(respostaTemp));
 
-        System.out.println("Olá " + Nome +" você tem " + Tentativas + "  tentativas para ganhar!");
+        System.out.println("Olá " + _nome +" você tem " + _tentativas + "  tentativas para ganhar!");
         PosicaoEltron();
     }
 
     private static void PosicaoEltron(){
         Random GeraNumAleatorio = new Random();
 
-        PosicaoXEltron = GeraNumAleatorio.nextInt(TamanhoTela);
-        System.out.println(PosicaoXEltron);
+        _posicaoXEltron = GeraNumAleatorio.nextInt(_tamanhoTela);
+        _posicaoYEltron = GeraNumAleatorio.nextInt(_tamanhoTela);
+        _distanciaEltron = GeraNumAleatorio.nextInt(_tamanhoTela);
 
-        PosicaoYEltron = GeraNumAleatorio.nextInt(TamanhoTela);
-        System.out.println(PosicaoYEltron);
-
-        DistanciaEltron = GeraNumAleatorio.nextInt(TamanhoTela);
-        System.out.println(DistanciaEltron);
     }
     private static void Jogadas(){
 
-        for (jogadas = 0; jogadas <= Tentativas; jogadas++){
+        int _jogadas;
+        for (_jogadas = 0; _jogadas <= _tentativas; _jogadas++){
             System.out.println();
-            System.out.println("Tentativa n°:" + jogadas);
+            System.out.println("Tentativa n°:" + _jogadas);
 
             String respostaTemp;
             do {
-                System.out.println(Nome + ", Escolha uma Posição X (0 a 9) ");
-                respostaTemp = EntradaDados.nextLine();
+                System.out.println(_nome + ", Escolha uma Posição X (0 a 9) ");
+                respostaTemp = _entradaDados.nextLine();
                 if (EhNumero(respostaTemp))
-                    PosicaoXJogador = Integer.parseInt(respostaTemp);
+                    _posicaoXJogador = Integer.parseInt(respostaTemp);
                 else
                     System.out.println("Digite um valor Válido (0 a 9)" );
             }while (!EhNumero(respostaTemp));
 
             do{
-                System.out.println(Nome+", Escolha uma Posição Y (0 a 9) ");
-                respostaTemp = EntradaDados.nextLine();
+                System.out.println(_nome +", Escolha uma Posição Y (0 a 9) ");
+                respostaTemp = _entradaDados.nextLine();
                 if (EhNumero(respostaTemp))
-                    PosicaoYJogador = Integer.parseInt(respostaTemp);
+                    _posicaoYJogador = Integer.parseInt(respostaTemp);
                 else
                     System.out.println("Digite um valor Válido (0 a 9)" );
             }while (!EhNumero(respostaTemp));
 
             do{
-                System.out.println(Nome+", Escolha uma Distancia (0 a 9) ");
-                respostaTemp = EntradaDados.nextLine();
+                System.out.println(_nome +", Escolha uma Distancia (0 a 9) ");
+                respostaTemp = _entradaDados.nextLine();
                 if (EhNumero(respostaTemp))
-                    DistanciaJogador = Integer.parseInt(respostaTemp);
+                    _distanciaJogador = Integer.parseInt(respostaTemp);
                 else
                     System.out.println("Digite um valor Válido (0 a 9)" );
             }while (!EhNumero(respostaTemp));
 
-            if (PosicaoXEltron == PosicaoXJogador && PosicaoYEltron == PosicaoYJogador && DistanciaEltron == DistanciaJogador){
+            if (_posicaoXEltron == _posicaoXJogador && _posicaoYEltron == _posicaoYJogador && _distanciaEltron == _distanciaJogador){
                 JogadorGanhou();
                 break;
             }
 
-            System.out.print(Nome + ", seu tiro ");
+            System.out.print(_nome + ", seu tiro ");
 
-            System.out.println((PosicaoYEltron < PosicaoYJogador) ? "X: Norte " : "X: Sul");
-            System.out.println((PosicaoXEltron < PosicaoXJogador) ? "Y:Leste " : "Y:Oeste");
-            System.out.println((DistanciaEltron < DistanciaJogador) ? "Distancia: Muito Longe" : "Distancia: Muito Perto");
+            System.out.println((_posicaoYEltron < _posicaoYJogador) ? "X: Norte " : "X: Sul");
+            System.out.println((_posicaoXEltron < _posicaoXJogador) ? "Y:Leste " : "Y:Oeste");
+            System.out.println((_distanciaEltron < _distanciaJogador) ? "Distancia: Muito Longe" : "Distancia: Muito Perto");
         }
         JogadorPerdeu();
     }
     private static void JogadorGanhou(){
-        System.out.println("Parabens " + Nome +" Voce Ganhou !!");
+        System.out.println("Parabens " + _nome +" Voce Ganhou !!");
     }
     private static void JogadorPerdeu(){
-        System.out.println("Infelizmente, " + Nome +" Voce Perdeu !!");
+        System.out.println("Infelizmente, " + _nome +" Voce Perdeu !!");
     }
     private static boolean EhNumero(String resposta) {
         return resposta != null && resposta.matches("[0-9]*");
