@@ -88,7 +88,7 @@ public class Main {
 
             System.out.println((_posicaoYEltron < _posicaoYJogador) ? "X: Norte " : "X: Sul");
             System.out.println((_posicaoXEltron < _posicaoXJogador) ? "Y:Leste " : "Y:Oeste");
-            System.out.println((_distanciaEltron < _distanciaJogador) ? "Distancia: Muito Longe" : "Distancia: Muito Perto");
+            System.out.println((_distanciaEltron > _distanciaJogador) ? "Distancia: Muito Longe" : "Distancia: Muito Perto");
         }
         JogadorPerdeu();
     }
